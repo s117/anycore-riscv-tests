@@ -13,13 +13,14 @@
 
 RISCV_INSTALL_DIR = RISCV_INSTALL_DIR_PLACE_HOLDER
 VERILOG_SRC 			= VERILOG_SRC_DIR_PLACE_HOLDER
+DW_PATH           = /tmp/anycore-tmp/DW
 
 # Overwrite CONFIG to change the superset configuration.
 CONFIG     = CONFIG_PLACE_HOLDER
 
 # Add additional flags
 DEFINES    = -64bit -turbo +define+SIM+USE_VPI+VERIFY+PRINT_EN \
-						 -INCDIR /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/ \
+						 -INCDIR $(DW_PATH)/sim_ver/ \
 						 -INCDIR $(VERILOG_SRC)/testbenches/ \
 						 #+define+WAVES
 
@@ -78,22 +79,22 @@ TB_CONFIG  = $(VERILOG_SRC)/testbenches/TbConfig1.svh
 
 #IODINE   = $(CURRENT)/../iodine/*.sv
 
-DW       = 	 /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW_fifoctl_s2_sf.v \
-             /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW_arb_fcfs.v \
-             /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW_mult_pipe.v \
-             /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW02_mult.v \
-             /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW_div_pipe.v \
-             /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW_div.v \
-             /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW03_pipe_reg.v	\
-             /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW_fp_add.v \
-             /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW_fp_addsub.v \
-             /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW_fp_sub.v \
-             /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW_fp_mult.v \
-             /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW_fp_sqrt.v \
-             /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW_fp_div.v \
-             /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW_fp_flt2i.v \
-             /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW_fp_cmp.v \
-             /afs/eos.ncsu.edu/dist/syn2013.03/dw/sim_ver/DW_fp_i2flt.v 
+DW       = 	 $(DW_PATH)/sim_ver/DW_fifoctl_s2_sf.v \
+             $(DW_PATH)/sim_ver/DW_arb_fcfs.v \
+             $(DW_PATH)/sim_ver/DW_mult_pipe.v \
+             $(DW_PATH)/sim_ver/DW02_mult.v \
+             $(DW_PATH)/sim_ver/DW_div_pipe.v \
+             $(DW_PATH)/sim_ver/DW_div.v \
+             $(DW_PATH)/sim_ver/DW03_pipe_reg.v	\
+             $(DW_PATH)/sim_ver/DW_fp_add.v \
+             $(DW_PATH)/sim_ver/DW_fp_addsub.v \
+             $(DW_PATH)/sim_ver/DW_fp_sub.v \
+             $(DW_PATH)/sim_ver/DW_fp_mult.v \
+             $(DW_PATH)/sim_ver/DW_fp_sqrt.v \
+             $(DW_PATH)/sim_ver/DW_fp_div.v \
+             $(DW_PATH)/sim_ver/DW_fp_flt2i.v \
+             $(DW_PATH)/sim_ver/DW_fp_cmp.v \
+             $(DW_PATH)/sim_ver/DW_fp_i2flt.v
 
 
 # Combines all the files
@@ -115,7 +116,7 @@ FILES_CHIP = $(MISC) $(DW) $(MEM) $(FETCH) $(DECODE) $(RENAME) $(DISPATCH) \
 					 	$(LSU) $(SERDES) $(IODINE) $(TB_CONFIG) $(TESTBENCH_CHIP)
 
 
-NCSC_RUNARGS = -access rwc -l run.log 
+NCSC_RUNARGS = -access rwc -l run.log
 
 # DPI files for Iodine
 DPI_CFLAGS = -g -m32 -fPIC -shared -I$(DPI_DIR) -I`ncroot`/tools/inca/include
@@ -126,10 +127,10 @@ run_nc:
 	clear
 	mkdir -p results
 	rm -rf *.log results/*
-	irun -top worklib.simulate:sv -sv_lib $(RISCV_INSTALL_DIR)/lib/libriscv_dpi.so $(DEFINES) $(NCSC_RUNARGS) $(FILES) 2>&1 |tee console.log 
+	irun -top worklib.simulate:sv -sv_lib $(RISCV_INSTALL_DIR)/lib/libriscv_dpi.so $(DEFINES) $(NCSC_RUNARGS) $(FILES) 2>&1 |tee console.log
 
 # Runs with the gui
-run_nc_g: 
+run_nc_g:
 	clear
 	mkdir -p results
 	rm -rf *.log results/*
