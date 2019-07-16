@@ -124,7 +124,7 @@ DEBUG        = +define+PRINT_EN
 
 
 run_nc:
-	clear
+	echo "------run_nc------"
 	mkdir -p results
 	rm -rf *.log results/*
 	irun -top worklib.simulate:sv -sv_lib $(RISCV_INSTALL_DIR)/lib/libriscv_dpi.so $(DEFINES) $(NCSC_RUNARGS) $(FILES) 2>&1 |tee console.log
@@ -138,19 +138,19 @@ run_g:
 
 # Runs with the gui
 run_nc_g:
-	clear
+	echo "------run_nc_g------"
 	mkdir -p results
 	rm -rf *.log results/*
 	irun -gui -top worklib.simulate:sv $(DEFINES)  $(NCSC_RUNARGS) $(FILES) $(VPI_FILES) $(VPI_FLAGS) 2>&1 |tee console.log
 
 chip:
-	clear
+	echo "------chip------"
 	mkdir -p results
 	rm -rf *.log results/*
 	irun -top worklib.simulate:sv $(DEFINES) $(NCSC_RUNARGS) $(FILES_CHIP) $(VPI_FILES) $(VPI_FLAGS)
 
 chip_g:
-	clear
+	echo "------chip_g------"
 	mkdir -p results
 	rm -rf *.log results/*
 	irun  -gui -top worklib.simulate:sv $(DEFINES) $(NCSC_RUNARGS) $(FILES_CHIP) $(VPI_FILES) $(VPI_FLAGS)
