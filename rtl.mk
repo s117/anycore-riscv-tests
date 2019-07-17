@@ -13,7 +13,7 @@
 
 RISCV_INSTALL_DIR = RISCV_INSTALL_DIR_PLACE_HOLDER
 VERILOG_SRC 			= VERILOG_SRC_DIR_PLACE_HOLDER
-DW_PATH           = /tmp/anycore-tmp/DW
+DW_PATH           = ~/anycore/DW
 
 # Overwrite CONFIG to change the superset configuration.
 CONFIG     = CONFIG_PLACE_HOLDER

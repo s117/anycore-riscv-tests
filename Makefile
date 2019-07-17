@@ -2,7 +2,7 @@
 
 ## Important paths ####################################
 # This is where all tests are run
-SCRATCH_SPACE 		= /tmp/anycore-tmp/riscv-new-scratch
+SCRATCH_SPACE 		= ~/anycore/riscv-new-scratch
 
 # This is the path where RISC-V tools are installed
 RISCV_INSTALL_DIR	= $(abspath ../install)
