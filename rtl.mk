@@ -13,7 +13,7 @@
 
 RISCV_INSTALL_DIR = RISCV_INSTALL_DIR_PLACE_HOLDER
 VERILOG_SRC 			= VERILOG_SRC_DIR_PLACE_HOLDER
-DW_PATH           = ~/anycore/DW
+DW_PATH           = $(VERILOG_SRC)/DW
 
 # Overwrite CONFIG to change the superset configuration.
 CONFIG     = CONFIG_PLACE_HOLDER
@@ -23,10 +23,22 @@ DEFINES    = -64bit -turbo +define+SIM+USE_VPI+VERIFY+PRINT_EN \
 						 -INCDIR $(DW_PATH)/sim_ver/ \
 						 -INCDIR $(VERILOG_SRC)/testbenches/ \
 						 #+define+WAVES
+VERILATOR_FLAGS = +define+SIM+USE_VPI+VERIFY+PRINT_EN \
+						 -I$(DW_PATH)/sim_ver/ \
+						 -I$(VERILOG_SRC)/testbenches/ \
+
+QUESTA_FLAGS = -sv +define+SIM+USE_VPI+VERIFY+PRINT_EN -suppress 2263\
+						 +incdir+$(DW_PATH)/sim_ver/ \
+						 +incdir+$(VERILOG_SRC)/testbenches/ \
+						 +incdir+$(VERILOG_SRC)/include/ \
 
 # The Verilog source files
 PARAMFILE = $(VERILOG_SRC)/configs/CommonConfig.svh	\
 						$(VERILOG_SRC)/configs/$(CONFIG).v
+
+HEADER   = $(PARAMFILE) \
+           $(VERILOG_SRC)/ISA/RISCV_ISA.sv \
+           $(VERILOG_SRC)/include/structs.svh \
 
 FETCH    = $(VERILOG_SRC)/fetch/*.sv
 
@@ -52,10 +64,7 @@ ICACHE	 = $(VERILOG_SRC)/icache/*.sv
 
 DCACHE	 = $(VERILOG_SRC)/dcache/*.sv
 
-MISC     = $(PARAMFILE) \
-           $(VERILOG_SRC)/ISA/RISCV_ISA.sv \
-           $(VERILOG_SRC)/include/structs.svh \
-           $(VERILOG_SRC)/lib/*.sv \
+MISC     = $(VERILOG_SRC)/lib/*.sv \
 	         $(VERILOG_SRC)/bist/*.sv
 
 MEM      = $(VERILOG_SRC)/configs/RAM_Params.svh	\
@@ -123,7 +132,17 @@ DPI_CFLAGS = -g -m32 -fPIC -shared -I$(DPI_DIR) -I`ncroot`/tools/inca/include
 DEBUG        = +define+PRINT_EN
 
 
-run_nc:
+$(VERILOG_SRC)/include/global_header.svh: $(HEADER) $(TB_CONFIG) $(VERILOG_SRC)/configs/RAM_Params.svh
+	echo "\`ifndef GLOBAL_HEADER_GUARD" > $@
+	echo "\`define GLOBAL_HEADER_GUARD" >> $@
+	echo "" >> $@
+	for file in $^ ; do \
+		echo "\`include \"$${file}\"" >> $@ ; \
+	done
+	echo "" >> $@
+	echo "\`endif // GLOBAL_HEADER_GUARD" >> $@
+
+run_nc: $(VERILOG_SRC)/include/global_header.svh
 	echo "------run_nc------"
 	mkdir -p results
 	rm -rf *.log results/*
@@ -137,11 +156,25 @@ run_g:
 
 
 # Runs with the gui
-run_nc_g:
+run_nc_g: $(VERILOG_SRC)/include/global_header.svh
 	echo "------run_nc_g------"
 	mkdir -p results
 	rm -rf *.log results/*
 	irun -gui -top worklib.simulate:sv $(DEFINES)  $(NCSC_RUNARGS) $(FILES) $(VPI_FILES) $(VPI_FLAGS) 2>&1 |tee console.log
+
+# run_verilator:
+# 	echo "------run_verilator------"
+# 	mkdir -p results
+# 	rm -rf *.log results/*
+# 	# irun -top worklib.simulate:sv -sv_lib $(RISCV_INSTALL_DIR)/lib/libriscv_dpi.so $(DEFINES) $(NCSC_RUNARGS) $(FILES) 2>&1 |tee console.log
+# 	verilator --lint-only --top-module simulate $(VERILATOR_FLAGS) $(FILES)
+
+run_questa: $(VERILOG_SRC)/include/global_header.svh
+	echo "------run_questa------"
+	mkdir -p results
+	rm -rf *.log results/*
+	vlib worklib
+	vlog $(QUESTA_FLAGS) $(FILES)
 
 chip:
 	echo "------chip------"

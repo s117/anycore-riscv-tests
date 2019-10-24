@@ -13,19 +13,18 @@
 ## CHANGES HERE: 
 rtl_micro_tests =	\
 				$(MICRO_SRC_DIR)/fibonacci/install+fibonacci+Config1+$(MICRO_SRC_DIR)/fibonacci/job	\
-				$(MICRO_SRC_DIR)/fibonacci/install+fibonacci+Config2+$(MICRO_SRC_DIR)/fibonacci/job	\
-				$(MICRO_SRC_DIR)/hello_world/install+hello_world+Config1+$(MICRO_SRC_DIR)/hello_world/job	\
-				$(MICRO_SRC_DIR)/hello_world/install+hello_world+Config2+$(MICRO_SRC_DIR)/hello_world/job	\
-				$(MICRO_SRC_DIR)/add_int/install+add_int+Config1+$(MICRO_SRC_DIR)/add_int/job	\
-				$(MICRO_SRC_DIR)/add_int/install+add_int+Config2+$(MICRO_SRC_DIR)/add_int/job	\
-				$(MICRO_SRC_DIR)/add_fp/install+add_fp+Config1+$(MICRO_SRC_DIR)/add_fp/job	\
-				$(MICRO_SRC_DIR)/add_fp/install+add_fp+Config2+$(MICRO_SRC_DIR)/add_fp/job	\
-				$(MICRO_SRC_DIR)/reduce_array/install+reduce_array+Config1+$(MICRO_SRC_DIR)/reduce_array/job	\
-				$(MICRO_SRC_DIR)/reduce_array/install+reduce_array+Config2+$(MICRO_SRC_DIR)/reduce_array/job	\
-				$(MICRO_SRC_DIR)/branchy/install+branchy+Config1+$(MICRO_SRC_DIR)/branchy/job	\
-				$(MICRO_SRC_DIR)/branchy/install+branchy+Config2+$(MICRO_SRC_DIR)/branchy/job	\
-				$(MICRO_SRC_DIR)/astar/install+astar+Config1+$(MICRO_SRC_DIR)/astar/job	\
-
+				# $(MICRO_SRC_DIR)/fibonacci/install+fibonacci+Config2+$(MICRO_SRC_DIR)/fibonacci/job	\
+				# $(MICRO_SRC_DIR)/hello_world/install+hello_world+Config1+$(MICRO_SRC_DIR)/hello_world/job	\
+				# $(MICRO_SRC_DIR)/hello_world/install+hello_world+Config2+$(MICRO_SRC_DIR)/hello_world/job	\
+				# $(MICRO_SRC_DIR)/add_int/install+add_int+Config1+$(MICRO_SRC_DIR)/add_int/job	\
+				# $(MICRO_SRC_DIR)/add_int/install+add_int+Config2+$(MICRO_SRC_DIR)/add_int/job	\
+				# $(MICRO_SRC_DIR)/add_fp/install+add_fp+Config1+$(MICRO_SRC_DIR)/add_fp/job	\
+				# $(MICRO_SRC_DIR)/add_fp/install+add_fp+Config2+$(MICRO_SRC_DIR)/add_fp/job	\
+				# $(MICRO_SRC_DIR)/reduce_array/install+reduce_array+Config1+$(MICRO_SRC_DIR)/reduce_array/job	\
+				# $(MICRO_SRC_DIR)/reduce_array/install+reduce_array+Config2+$(MICRO_SRC_DIR)/reduce_array/job	\
+				# $(MICRO_SRC_DIR)/branchy/install+branchy+Config1+$(MICRO_SRC_DIR)/branchy/job	\
+				# $(MICRO_SRC_DIR)/branchy/install+branchy+Config2+$(MICRO_SRC_DIR)/branchy/job	\
+				# $(MICRO_SRC_DIR)/astar/install+astar+Config1+$(MICRO_SRC_DIR)/astar/job	\
 
 
 ## Testcases for benchmarks that run from the begining
@@ -38,8 +37,8 @@ rtl_chkpt_tests = \
 
 all_rtl_tests =	\
 				$(rtl_micro_tests) \
-				$(rtl_bmark_tests) \
-				$(rtl_chkpt_tests) \
+				# $(rtl_bmark_tests) \
+				# $(rtl_chkpt_tests) \
 
 ########################################################################
 ## Testcases for gate-level simulations
