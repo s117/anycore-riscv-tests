@@ -28,7 +28,8 @@ VERILATOR_FLAGS = +define+SIM+USE_VPI+VERIFY+PRINT_EN \
 						 -I$(DW_PATH)/sim_ver/ \
 						 -I$(VERILOG_SRC)/testbenches/ \
 
-QUESTA_FLAGS = -sv +define+SIM+USE_VPI+VERIFY+PRINT_EN -suppress 2263\
+QUESTA_SUPPRESS_FLAGS = -suppress 2263 -suppress 8607 -suppress 12003
+QUESTA_FLAGS = -sv +define+SIM+USE_VPI+VERIFY+PRINT_EN \
 						 +incdir+$(DW_PATH)/sim_ver/ \
 						 +incdir+$(VERILOG_SRC)/testbenches/ \
 						 +incdir+$(VERILOG_SRC)/include/ \
@@ -175,7 +176,8 @@ run_questa: $(VERILOG_SRC)/include/global_header.svh
 	mkdir -p results
 	rm -rf *.log results/*
 	vlib worklib
-	vlog $(QUESTA_FLAGS) $(FILES)
+	vlog $(QUESTA_FLAGS) $(QUESTA_SUPPRESS_FLAGS) $(FILES)
+	vsim $(QUESTA_SUPPRESS_FLAGS) -gblso $(RISCV_INSTALL_DIR)/lib/libriscv_dpi.so simulate -dpioutoftheblue 1
 
 chip:
 	echo "------chip------"

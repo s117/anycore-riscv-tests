@@ -79,8 +79,7 @@ $(1):
 	sed -i 's/CONFIG_PLACE_HOLDER/$(4)/g' makefile;	\
 	sed -i 's:RISCV_INSTALL_DIR_PLACE_HOLDER:$(RISCV_INSTALL_DIR):g' makefile;	\
 	sed -i 's:VERILOG_SRC_DIR_PLACE_HOLDER:$(VERILOG_SRC_DIR):g' makefile;	\
-	csh -c '$(MAKE) -f makefile run_nc';	\
-	#csh -c '$(MAKE) -f makefile run_questa';	\
+	csh -c '$(MAKE) -f makefile run_questa';	\
 	cd $(ANYCORE_TEST_DIR)
 
 endef
