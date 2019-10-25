@@ -22,6 +22,7 @@ CONFIG     = CONFIG_PLACE_HOLDER
 DEFINES    = -64bit -turbo +define+SIM+USE_VPI+VERIFY+PRINT_EN \
 						 -INCDIR $(DW_PATH)/sim_ver/ \
 						 -INCDIR $(VERILOG_SRC)/testbenches/ \
+						 -INCDIR $(VERILOG_SRC)/include/ \
 						 #+define+WAVES
 VERILATOR_FLAGS = +define+SIM+USE_VPI+VERIFY+PRINT_EN \
 						 -I$(DW_PATH)/sim_ver/ \
