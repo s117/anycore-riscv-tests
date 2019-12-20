@@ -175,9 +175,11 @@ run_questa: $(VERILOG_SRC)/include/global_header.svh
 	echo "------run_questa------"
 	mkdir -p results
 	rm -rf *.log results/*
-	vlib worklib
+	vlib work
 	vlog $(QUESTA_FLAGS) $(QUESTA_SUPPRESS_FLAGS) $(FILES)
-	vsim $(QUESTA_SUPPRESS_FLAGS) -gblso $(RISCV_INSTALL_DIR)/lib/libriscv_dpi.so simulate -dpioutoftheblue 1
+	vopt +acc simulate -o optimized_debug_simulate
+	vsim $(QUESTA_SUPPRESS_FLAGS) -gblso $(RISCV_INSTALL_DIR)/lib/libriscv_dpi.so optimized_debug_simulate -dpioutoftheblue 1
+	#vsim $(QUESTA_SUPPRESS_FLAGS) -gblso $(RISCV_INSTALL_DIR)/lib/libriscv_dpi.so simulate -dpioutoftheblue 1
 
 chip:
 	echo "------chip------"
