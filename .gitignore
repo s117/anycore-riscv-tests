@@ -2,3 +2,6 @@
 *.riscv
 *.dump
 anycore-scratch
+build*
+*.log
+misc
