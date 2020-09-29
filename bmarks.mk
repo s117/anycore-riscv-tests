@@ -245,7 +245,8 @@ smpt_spec_2k17_ref_bmarks = \
 				$(SPEC_BIN_DIR)/605.mcf_s_ref+605.mcf_s_ref \
 				$(SPEC_BIN_DIR)/620.omnetpp_s_ref+620.omnetpp_s_ref \
 				$(SPEC_BIN_DIR)/623.xalancbmk_s_ref+623.xalancbmk_s_ref \
-				$(SPEC_BIN_DIR)/625.x264_s_ref+625.x264_s_ref \
+				$(SPEC_BIN_DIR)/625.x264_s_ref+625.x264_s_base_ref \
+				$(SPEC_BIN_DIR)/625.x264_s_ref+625.x264_s_two_pass_ref \
 				$(SPEC_BIN_DIR)/631.deepsjeng_s_ref+631.deepsjeng_s_ref \
 				$(SPEC_BIN_DIR)/641.leela_s_ref+641.leela_s_ref \
 				$(SPEC_BIN_DIR)/648.exchange2_s_ref+648.exchange2_s_ref \

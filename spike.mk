@@ -2,7 +2,6 @@ RISCV_INSTALL_DIR = RISCV_INSTALL_DIR_PLACEHOLDER
 SIMPOINT_TOOL_DIR = SIMPOINT_TOOL_DIR_PLACEHOLDER
 SPIKE_ARGS = SPIKE_ARGS_PLACEHOLDER
 
-
 bmarks = BMARKS_PLACEHOLDER
 #chkpt_skip_amt = 1000  #In millions
 
@@ -168,7 +167,8 @@ check_simpoint_dir:
 600.perlbench_s_split_ref:	;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m8192 $(SPIKE_ARGS) pk -c perlbench_s_base.riscv-m64 -I./lib splitmail.pl 6400 12 26 16 100 0 2>&1 | tee run.log
 605.mcf_s_ref:      				;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m16384 $(SPIKE_ARGS) pk -c mcf_s_base.riscv-m64 inp.in  2>&1 | tee run.log
 623.xalancbmk_s_ref:				;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m8192 $(SPIKE_ARGS) pk -c xalancbmk_s_base.riscv-m64 -v t5.xml xalanc.xsl 2>&1 | tee run.log
-625.x264_s_ref:     				;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m8192 $(SPIKE_ARGS) pk -c ldecod_s_base.riscv-m64 -i BuckBunny.264 -o BuckBunny.yuv 2>&1 | tee run.log
+625.x264_s_base_ref:				;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m8192 $(SPIKE_ARGS) pk -c ./x264_s_base.riscv-m64 --seek 500 --dumpyuv 200 --frames 1250 -o BuckBunny_New.264 BuckBunny.yuv 1280x720 2>&1 | tee run.log
+625.x264_s_two_pass_ref:		;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m8192 $(SPIKE_ARGS) pk -c ./x264_s_base.riscv-m64 --pass 1 --stats x264_stats.log --bitrate 1000 --frames 1000 -o BuckBunny_New.264 BuckBunny.yuv 1280x720 2>&1 | tee run_pass_1.log ; nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m8192 $(SPIKE_ARGS) pk -c ./x264_s_base.riscv-m64 --pass 2 --stats x264_stats.log --bitrate 1000 --dumpyuv 200 --frames 1000 -o BuckBunny_New.264 BuckBunny.yuv 1280x720 2>&1 | tee run_pass_2.log
 641.leela_s_ref:    				;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m8192 $(SPIKE_ARGS) pk -c leela_s_base.riscv-m64 ref.sgf 2>&1 | tee run.log
 648.exchange2_s_ref:				;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m8192 $(SPIKE_ARGS) pk -c exchange2_s_base.riscv-m64 6 2>&1 | tee run.log
 
