@@ -5,3 +5,4 @@ anycore-scratch
 build*
 *.log
 misc
+scripts/bin
