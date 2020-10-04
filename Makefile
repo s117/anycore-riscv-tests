@@ -198,7 +198,8 @@ $(1):
 		echo "$(3)" >> "$(CHKPT_TEST_DIR)"/smpt_succ.list; \
 		cp -v $(SMPT_TEST_DIR)/$(3)/simpoints $(CHKPT_TEST_DIR)/$(3)/simpoints; \
 		cp -v $(SMPT_TEST_DIR)/$(3)/weights   $(CHKPT_TEST_DIR)/$(3)/weights; \
-		$(SCRIPTS_DIR)/smpt2ckptdesc.py "$(SIMPOINT_INTERVAL)" "$(3)" "$(CHKPT_TEST_DIR)/$(3)/simpoints" "$(CHKPT_TEST_DIR)/$(3)/weights" > "$(CHKPT_TEST_DIR)/$(3)/ckptdesc"; \
+		cp -v $(SMPT_TEST_DIR)/$(3)/pcfvec_proc_0.pcfreq.gz $(CHKPT_TEST_DIR)/$(3)/pcfvec_proc_0.pcfreq.gz; \
+		$(SCRIPTS_DIR)/smpt2ckptdesc.py "$(SIMPOINT_INTERVAL)" "$(3)" "$(CHKPT_TEST_DIR)/$(3)/simpoints" "$(CHKPT_TEST_DIR)/$(3)/weights" "$(CHKPT_TEST_DIR)/$(3)/pcfvec_proc_0.pcfreq.gz" > "$(CHKPT_TEST_DIR)/$(3)/ckptdesc"; \
 		sed -i -e 's:RISCV_INSTALL_DIR_PLACEHOLDER:$(RISCV_INSTALL_DIR):g' $(CHKPT_TEST_DIR)/$(3)/Makefile; \
 		sed -i -e 's:SIMPOINT_TOOL_DIR_PLACEHOLDER:$(SIMPOINT_TOOL_DIR):g' $(CHKPT_TEST_DIR)/$(3)/Makefile; \
 		sed -i -e 's:BMARKS_PLACEHOLDER:$(3):g' $(CHKPT_TEST_DIR)/$(3)/Makefile; \
