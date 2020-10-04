@@ -156,6 +156,8 @@ CPU2017_638_IMAGICK_VAL = "$(SCRIPTS_DIR)/bin/imagevalidate_638_base.x64-m64"
 454.calculix_ref:
 	$(SPIKE_CMD) -m2048 pk -c ./calculix_base.riscv -i  hyperviscoplastic 2>&1 | tee run.log
 
+456.hmmer_test:
+	$(SPIKE_CMD) -m2048 pk -c ./hmmer_base.riscv --fixed 0 --mean 325 --num 45000 --sd 200 --seed 0 bombesin.hmm 2>&1 | tee run.log
 456.hmmer_nph3_ref:
 	$(SPIKE_CMD) -m2048 pk -c ./hmmer_base.riscv nph3.hmm swiss41 2>&1 | tee run.log
 456.hmmer_retro_ref:
@@ -379,6 +381,8 @@ CPU2017_638_IMAGICK_VAL = "$(SCRIPTS_DIR)/bin/imagevalidate_638_base.x64-m64"
 454.calculix_ref_postprocess:
 	$(SPIKE_TRIM) run.log > hyperviscoplastic.log # stderr: hyperviscoplastic.err
 
+456.hmmer_test_postprocess:
+	$(SPIKE_TRIM) run.log > bombesin.out # stderr: bombesin.err
 456.hmmer_nph3_ref_postprocess:
 	$(SPIKE_TRIM) run.log > nph3.out # stderr: nph3.err
 456.hmmer_retro_ref_postprocess:
@@ -657,6 +661,8 @@ CPU2017_638_IMAGICK_VAL = "$(SCRIPTS_DIR)/bin/imagevalidate_638_base.x64-m64"
 	$(CPU2006_DIFF) -m -l 10  --abstol 1e-09  --reltol 1e-09  --obiwan $(CPU2006_BENCH)/454.calculix/data/ref/output/SPECtestformatmodifier_z.txt SPECtestformatmodifier_z.txt > SPECtestformatmodifier_z.txt.cmp
 	$(CPU2006_DIFF) -m -l 10  --abstol 1e-09  --reltol 1e-09  --obiwan $(CPU2006_BENCH)/454.calculix/data/ref/output/hyperviscoplastic.dat hyperviscoplastic.dat > hyperviscoplastic.dat.cmp
 
+456.hmmer_test_compare: 456.hmmer_test_postprocess
+	$(CPU2006_DIFF) -m -l 10  --abstol 1e-05  --reltol 0.002 $(CPU2006_BENCH)/456.hmmer/data/test/output/bombesin.out bombesin.out > bombesin.out.cmp
 456.hmmer_nph3_ref_compare: 456.hmmer_nph3_ref_postprocess
 	$(CPU2006_DIFF) -m -l 10  --abstol 1e-05  --reltol 0.002 $(CPU2006_BENCH)/456.hmmer/data/ref/output/nph3.out nph3.out > nph3.out.cmp
 456.hmmer_retro_ref_compare: 456.hmmer_retro_ref_postprocess

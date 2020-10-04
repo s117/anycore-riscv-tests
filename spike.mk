@@ -99,7 +99,8 @@ rec_simenv_ver:
 403.gcc_ref: rec_simenv_ver									;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m2048 $(SPIKE_ARGS) pk -c ./gcc_base.riscv expr.in -o expr.s 2>&1 | tee run.log
 429.mcf_ref: rec_simenv_ver									;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m2048 $(SPIKE_ARGS) pk -c ./mcf_base.riscv inp.in 2>&1 | tee run.log
 445.gobmk_ref: rec_simenv_ver								;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m2048 $(SPIKE_ARGS) pk -c ./gobmk_base.riscv --quiet --mode gtp < score2.tst 2>&1 | tee run.log
-456.hmmer_ref: rec_simenv_ver								;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m2048 $(SPIKE_ARGS) pk -c ./hmmer_base.riscv nph3.hmm swiss41 2>&1 | tee run.log
+456.hmmer_nph3_ref: rec_simenv_ver					;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m2048 $(SPIKE_ARGS) pk -c ./hmmer_base.riscv nph3.hmm swiss41 2>&1 | tee run.log
+456.hmmer_retro_ref: rec_simenv_ver					;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m2048 $(SPIKE_ARGS) pk -c ./hmmer_base.riscv --fixed 0 --mean 500 --num 500000 --sd 350 --seed 0 retro.hmm 2>&1 | tee run.log
 458.sjeng_ref: rec_simenv_ver								;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m2048 $(SPIKE_ARGS) pk -c ./sjeng_base.riscv ref.txt 2>&1 | tee run.log
 462.libquantum_ref: rec_simenv_ver					;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m2048 $(SPIKE_ARGS) pk -c ./libquantum_base.riscv 1397 8 2>&1 | tee run.log
 464.h264ref_ref: rec_simenv_ver							;-nice -19 $(RISCV_INSTALL_DIR)/bin/spike	-m2048 $(SPIKE_ARGS) pk -c ./h264ref_base.riscv -d foreman_ref_encoder_baseline.cfg 2>&1 | tee run.log

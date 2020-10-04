@@ -187,7 +187,8 @@ smpt_spec_2k6_ref_bmarks =	\
 				$(SPEC_BIN_DIR)/403.gcc_ref+403.gcc_ref \
 				$(SPEC_BIN_DIR)/429.mcf_ref+429.mcf_ref \
 				$(SPEC_BIN_DIR)/445.gobmk_ref+445.gobmk_ref \
-				$(SPEC_BIN_DIR)/456.hmmer_ref+456.hmmer_ref \
+				$(SPEC_BIN_DIR)/456.hmmer_ref+456.hmmer_nph3_ref \
+				$(SPEC_BIN_DIR)/456.hmmer_ref+456.hmmer_retro_ref \
 				$(SPEC_BIN_DIR)/458.sjeng_ref+458.sjeng_ref \
 				$(SPEC_BIN_DIR)/462.libquantum_ref+462.libquantum_ref \
 				$(SPEC_BIN_DIR)/464.h264ref_ref+464.h264ref_ref \
