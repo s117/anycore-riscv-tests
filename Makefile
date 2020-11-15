@@ -59,25 +59,24 @@ all:	$(rtl_tests)
 rtl:	$(micro_rtl_tests)
 gate:	$(gate_tests)
 spike:	$(spike_tests)
-chkpt: check_env_SPEC_BIN_DIR	${chkpts}
-smpt: check_env_SPEC_BIN_DIR	${smpts}
-simonly: check_env_SPEC_BIN_DIR	${simonlys}
+chkpt: ${chkpts}
+smpt: ${smpts}
+simonly: ${simonlys}
 
 .ONESHELL:
 
-check_env_SPEC_BIN_DIR:
 ifndef SPEC_BIN_DIR
-	$(info Error: The path to the benchmark build directory (location of compiled binaries, ref_inputs etc.) is not provided.)
-	$(info )
-	$(info Hint: Fix this error by 'export SPEC_BIN_DIR=__YOUR_SPEC_BUILD_DIR__'. If Speckle is used to compile SPEC benchmarks, provide the path to the Speckle build directory.)
-	$(info )
-	$(error missing critical enviroment variable )
+$(info Error:)
+$(info Variable 'SPEC_BIN_DIR' is not set.)
+$(info )
+$(info Hint:)
+$(info This is the path to the prestined SPEC benchmark directory (location of compiled binaries, reference inputs, etc.).)
+$(info To fix this error, set SPEC_BIN_DIR to your Speckle's build directory.)
+$(info )
+$(error missing critical enviroment variable )
 else
-	$(info Using benchmark binaries from directory "$(SPEC_BIN_DIR)")
+$(info Using benchmark binaries from directory "$(SPEC_BIN_DIR)")
 endif
-
-check_simpoint_bin: $(SIMPOINT_TOOL_DIR)/bin/simpoint
-	echo TODO
 
 #TODO: Store example SPEC jobfiles somewhere
 #TODO: Add checkpoints to the job file dynamically
